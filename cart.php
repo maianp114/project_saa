@@ -143,7 +143,7 @@ hr {
                             echo "<tr>";
                             echo '<td><img src="img/'.$row["p_img"].'" width="70" height="70"></td>';
                             echo "<td>".$row["p_name"]."</td>";
-                            echo "<td width='15%'><input class='form-control' type='number' value='1'></td>";
+                            echo "<td width='15%'><input class='form-control' type='number' value='$p_qty' name='amount[$p_id]'></td>";
                             echo "<td>".number_format($row["p_price"],2)." บาท</td>";
                             echo "<td><a href='cart.php?p_id=$p_id&act=remove' class='btn btn-danger btn-block'><i class='fas fa-trash-alt'></i> ลบ</button></td>";
                             echo "</tr>";
@@ -164,13 +164,14 @@ hr {
                             echo '</div>';
                             echo '</div>';
                     }
+                    
                 ?> 
 						<button type="button" name="Submit2" onclick="window.location='confirm.php';" class="btn btn-block cart_submit"><i class="fas fa-shopping-cart"></i> สั่งชื้อ</button>
 						<div style="clear:both"></div>
 						<div class="container_fix">
-				<a href="test2.php" class="btn btn-dark"><i class="fas fa-caret-left"></i>  กลับไปเลือกสินค้าต่อ</a>
-            <div class="float-right">
-                        <button type="submit" class="btn btn-warning" name="button"><i class="fas fa-calculator"></i> คำนวนใหม่</button>        
+                        <a href="test2.php" class="btn btn-dark"><i class="fas fa-caret-left"></i>  กลับไปเลือกสินค้าต่อ</a>
+                        <div class="float-right">
+                        <button type="submit" name="button" id="button" class="btn btn-warning"><i class="fas fa-calculator"></i> คำนวนใหม่</button>        
 						</div>
 		</div>
 		</div>
