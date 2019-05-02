@@ -44,95 +44,137 @@
 	}
 	?>
 
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Shopping Cart devbanban</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Sarabun" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 </head>
-
-<body>
-<?php include('condb.php');?>
-<?php include("menu.php");?>
-<br>
-<br>
-<div class="container">
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-7">
-      <form id="frmcart" name="frmcart" method="post" action="?act=update">
-        <table width="100%" border="0" align="center" class="table table-hover">
-        <tr>
-          <td height="40" colspan="7" align="center" bgcolor="#CCCCCC"><strong><b>ตะกร้าสินค้า</span></strong></td>
-        </tr>
-        <tr>
-          <td align="center" bgcolor="#EAEAEA"><strong>No.</strong></td>
-          <td align="center" bgcolor="#EAEAEA"><strong>image</strong></td>
-          <td align="center" bgcolor="#EAEAEA"><strong>สินค้า</strong></td>
-          <td align="center" bgcolor="#EAEAEA"><strong>ราคา</strong></td>
-          <td align="center" bgcolor="#EAEAEA"><strong>จำนวน</strong></td>
-          <td align="center" bgcolor="#EAEAEA"><strong>รวม/รายการ</strong></td>
-          <td align="center" bgcolor="#EAEAEA"><strong>ลบ</strong></td>
-        </tr>
-        <?php
-
-if(!empty($_SESSION['shopping_cart']))
-{
-require_once('condb.php');
-	foreach($_SESSION['shopping_cart'] as $p_id=>$p_qty)
-	{
-		$sql = "select * from ecu_product where p_id=$p_id";
-		$query = mysqli_query($con, $sql);
-		while($row = mysqli_fetch_array($query))
-		{
-		 
-		$sum = $row['p_price'] * $p_qty;
-		$total += $sum;
-		echo "<tr>";
-		echo "<td>";
-        echo $i += 1;
-        echo ".";
-		echo "</td>";
-		echo "<td width='100'>"."<img src='img/$row[p_img]'  width='50'/>"."</td>";
-		echo "<td width='334'>"." " . $row["p_name"] . "</td>";
-		echo "<td width='100' align='right'>" . number_format($row["p_price"],2) . "</td>";
-		
-		echo "<td width='57' align='right'>";  
-		echo "<input type='text' name='amount[$p_id]' value='$p_qty' size='2'/></td>";
-		
-		echo "<td width='100' align='right'>" .number_format($sum,2)."</td>";
-		echo "<td width='100' align='center'><a href='cart.php?p_id=$p_id&act=remove' class='btn btn-danger btn-xs'>ลบ</a></td>";
-		
-		echo "</tr>";
-		}
- 
-	}
-	echo "<tr>";
-  	echo "<td colspan='5' bgcolor='#CEE7FF' align='right'>Total</td>";
-  	echo "<td align='right' bgcolor='#CEE7FF'>";
-  	echo "<b>";
-  	echo  number_format($total,2);
-  	echo "</b>";
-  	echo "</td>";
-  	echo "<td align='left' bgcolor='#CEE7FF'></td>";
-	echo "</tr>";
+<style>
+    body {
+        font-family: 'Sarabun', sans-serif;
+        background: #e6e7eb;
+    }
+.box_cart {
+    width: 650px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 8px rgba(214, 214, 214, 0.2);
+    box-shadow: 0 1px 8px rgba(214, 214, 214, 0.2);
+    padding: 10px 20px 10px 20px;
+    margin-top:200px
+}    
+hr {
+    display: block; height: 1px;
+    border: 0; border-top: 1px solid #ccc;
+    margin: 1em 0; padding: 0; 
 }
-?>
-        <tr>
-          <td></td>
-          <td colspan="5" align="right">
-          <a href=" cart.php?act=Cancel-Cart" class="btn btn-danger"> ยกเลิกตะกร้าสินค้า </a>
-          <button type="submit" name="button" id="button" class="btn btn-warning"> คำนวณราคาใหม่ </button>
-            <button type="button" name="Submit2"  onclick="window.location='confirm.php';" class="btn btn-primary"> 
-            <span class="glyphicon glyphicon-shopping-cart"> </span> สั่งซื้อ </button>
-            </td>
-        </tr>
-      </form>
-      <p align="center"> <a href="test2.php" class="btn btn-primary">กลับไปเลือกสินค้า</a> </p>
-    </div>
-  </div>
-</div>
+.cart_zone {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px
+}
+
+.btn {
+}
+.cart_submit {
+    padding: 15px;
+    font-size: 20px;
+    color: #FFFFFF;
+    background: linear-gradient(to right, #fc5c7d, #6a82fb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-color: #FFFFFF;
+    box-shadow: 0 1px 8px rgba(214, 214, 214, 0.2);
+    -moz-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: background .2s ease-in;
+    
+}
+
+.cart_submit:hover {
+    color: #FFFFFF;
+    box-shadow: 0 1px 8px rgba(214, 214, 214, 0.2);
+    
+}
+
+.table td, .table th {
+    vertical-align: initial!important;
+}
+
+.container_fix {
+		width: 100%;
+    margin: 0 auto;
+		margin-top:10px
+}
+
+</style>
+<body>
+    <form action="?act=update" method="post">
+    <div class="box_cart">
+        <h3>ORDER</h3>
+        <table class="table">
+            <tbody>
+            <?php
+                    $total = 0;
+                    if(!empty($_SESSION['shopping_cart']))
+                        {
+                        require_once('condb.php');
+                            foreach($_SESSION['shopping_cart'] as $p_id=>$p_qty)
+                            {
+                                $sql = "select * from ecu_product where p_id=$p_id";
+                                $query = mysqli_query($con, $sql);
+                                while($row = mysqli_fetch_array($query))
+                                {
+                            $sql = "select * from ecu_product where p_id=$p_id";
+                            $query = mysqli_query($con, $sql);
+                            $row = mysqli_fetch_array($query);
+                            $sum = $row['p_price'] * $p_qty;
+														$total += $sum;
+														$net = $total*0.93;
+														$vat = $total*0.07;
+                            @$i = $i + 1;
+                            echo "<tr>";
+                            echo '<td><img src="img/'.$row["p_img"].'" width="70" height="70"></td>';
+                            echo "<td>".$row["p_name"]."</td>";
+                            echo "<td width='15%'><input class='form-control' type='number' value='1'></td>";
+                            echo "<td>".number_format($row["p_price"],2)." บาท</td>";
+                            echo "<td><a href='cart.php?p_id=$p_id&act=remove' class='btn btn-danger btn-block'><i class='fas fa-trash-alt'></i> ลบ</button></td>";
+                            echo "</tr>";
+                        }
+                    }
+                            echo "<hr>";
+                            echo "</tbody></table>";
+                            echo '<div class="row" style="padding:10px">';
+                            echo '<div class="col-9">';
+                            echo 'ราคาสุทธิ <br>';
+                            echo 'ภาษีมูลค่าเพิ่ม<br>';
+                            echo 'ราคารวม';
+                            echo '</div>';
+                            echo '<div class="col-3">';
+                            echo number_format($net,2).'<br>';
+                            echo number_format($vat,2).'<br>';
+                            echo "<h5><b>".number_format($total,2)."</b><br></h5>";
+                            echo '</div>';
+                            echo '</div>';
+                    }
+                ?> 
+						<button type="button" name="Submit2" onclick="window.location='confirm.php';" class="btn btn-block cart_submit"><i class="fas fa-shopping-cart"></i> สั่งชื้อ</button>
+						<div style="clear:both"></div>
+						<div class="container_fix">
+				<a href="test2.php" class="btn btn-dark"><i class="fas fa-caret-left"></i>  กลับไปเลือกสินค้าต่อ</a>
+            <div class="float-right">
+                        <button type="submit" class="btn btn-warning" name="button"><i class="fas fa-calculator"></i> คำนวนใหม่</button>        
+						</div>
+		</div>
+		</div>
+	
+    </form>
 </body>
 </html>
