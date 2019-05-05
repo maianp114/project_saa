@@ -16,14 +16,17 @@ error_reporting( error_reporting() & ~E_NOTICE );?>
        
       </div>
             <div class="col-md-9">
-            <p align='center'>จัดการสต๊อกสินค้า</p>
+            <p align='center'>ตรวจสอบออเดอร์</p>
         <p></p>
 		<?php
 			$act = $_GET['act'];
-            if ($act == 'add') {
-			include('add_stock.php');}
-            else {
-			include('stock_list.php');
+			if($act == 'add'){
+			include('add_product.php');
+			}elseif ($act == 'check') {
+			include('check_payment.php');
+      }
+			else {
+			include('update_pay_list.php');
 			}	
 			?>
         

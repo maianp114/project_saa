@@ -1,5 +1,6 @@
-  <!--start menu -->
+
   <?php
+
   session_start();
 	$ccon = "SELECT * FROM ecu_member WHERE c_id = '".@$_SESSION['UserID']."'";
 	$objQuery = mysqli_query($con,$ccon);
@@ -20,22 +21,33 @@
   </div>
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="test2.php"><i class="fas fa-home"></i> หน้าหลัก</a></li>
-      <li><a href="#">วิธีซื้อสินค้า</a></li>
+      <li ><a href="test2.php"><i class="fas fa-home"></i> หน้าหลัก</a></li>
       <?php
        if($objResult["c_level"] == "m") { echo"
-      <li><a href='show_order_detail.php'>ตรวจสอบออเดอร์</a></li>
-      <li><a href='cus_edit.php?UserID=$objResult[c_id]'>แก้ไขข้อมูลส่วนตัว</a></li>   " ;} ?> 
+     
+      <li><a href='order_pay.php'><i class='fas fa-cash-register'></i> ชำระเงิน</a></li>
+      <li><a href='show_order_detail.php?'><i class='fas fa-shopping-basket'></i> ตรวจสอบออเดอร์</a></li>
+         " ;} ?> 
     </ul>
     
  
     <ul class="nav navbar-nav navbar-right">
-    <?php if($objResult["c_level"] == "m") { echo '<li><a href="">',$objResult["c_name"],"</a></li>", 
-	'<li><a href="logout.php">Logout</a></li>'; } else { ?>
-      <li><a href="register.php">Register</a></li>
+    <?php
+    if($objResult["c_level"] == "m") { echo"
+        <li class='dropdown'>
+          <a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><i class='fas fa-user-tie'></i>  $objResult[c_name]  <span class='caret'></span></a>
+          <ul class='dropdown-menu'>
+            <li><a href='cus_edit.php?UserID=$objResult[c_id]'><i class='fas fa-user-edit'></i> แก้ไขข้อมูลส่วนตัว</a></li>
+            <li role='separator' class='divider'></li>
+            <li><a href='logout.php'><i class='fas fa-sign-out-alt'></i> ออกจากระบบ</a></li>
+          </ul>
+        </li>     
+        "; } else { ?>
+         <li><a href="register.php">Register</a></li>
       <li><a href="login.php">Login</a></li>
       <?php } ?>
-    </ul>
+      </ul>
+
     </div>
   </div>
 </div>

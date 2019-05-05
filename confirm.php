@@ -19,7 +19,7 @@ include("menu.php");?>
     	<div class="col-md-2"></div>
         <div class="col-md-8">
 
-  <p><a href="cart.php">กลับหน้าตะกร้าสินค้า</a> &nbsp;  <button class="btn btn-primary" onClick="window.print()"> print </button></p>
+  <p><a href="cart.php">กลับหน้าตะกร้าสินค้า</a> &nbsp; 
   <table width="700" border="1" align="center" class="table">
     <tr>
       <td width="1558" colspan="5" align="center">
@@ -41,7 +41,9 @@ include("menu.php");?>
 		$query = mysqli_query($con, $sql);
 		$row	= mysqli_fetch_array($query);
 		$sum	= $row['p_price']*$p_qty;
-		$total	+= $sum;
+    $total	+= $sum;
+    $net = $total*0.93;
+    $vat = $total*0.07;
     echo "<tr>";
 	echo "<td align='center'>";
 	echo  $i += 1;
@@ -53,6 +55,14 @@ include("menu.php");?>
     echo "</tr>";
 	}
 	echo "<tr>";
+    echo "<td  align='right' colspan='4'><b>ราคาสุทธิ</b></td>";
+    echo "<td align='right'>"."<b>".number_format($net,2)."</b>"."</td>";
+    echo "</tr>";
+    echo "<tr>";
+    echo "<td  align='right' colspan='4'><b>ภาษี 7%</b></td>";
+    echo "<td align='right'>"."<b>".number_format($vat,2)."</b>"."</td>";
+    echo "</tr>";
+    echo "<tr>";
     echo "<td  align='right' colspan='4'><b>รวม</b></td>";
     echo "<td align='right'>"."<b>".number_format($total,2)."</b>"."</td>";
     echo "</tr>";
@@ -112,3 +122,4 @@ include("menu.php");?>
 
 </body>
 </html>
+<?php include('script.php');?> 

@@ -5,8 +5,8 @@ include('condb.php');  //ไฟล์เชื่อมต่อกับ databa
   $c_pass = $_REQUEST["c_pass"];
   $c_name = $_REQUEST["c_name"];
   $c_email = $_REQUEST["c_email"];
+  $c_tel = $_REQUEST["c_tel"];
   $status = 'm';
-  $c_lvl = $_REQUEST["c_lvl"];
   $c_address = $_REQUEST["c_address"];
   //เพิ่มเข้าไปในฐานข้อมูล
   $sql = "INSERT INTO ecu_member(c_user, c_pass, c_name, c_email, c_tel,c_level, c_address)
@@ -21,7 +21,7 @@ include('condb.php');  //ไฟล์เชื่อมต่อกับ databa
   if($result){
   echo "<script type='text/javascript'>";
   echo "alert('Register Succesfuly');";
-  echo "window.location = 'c_index.php'; ";
+  echo "window.location = 'test2.php'; ";
   echo "</script>";
   }
   else{

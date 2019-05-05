@@ -74,9 +74,9 @@ $test = '
 <td align="center">  '.number_format($total,2) .'</td>
 </tr>';
 
-$nam = $row2[name];
-$address = $row2[address];
-$email = $row2[email];
+$nam = $row2['name'];
+$address = $row2['address'];
+$email = $row2['email'];
 $tel = $row2['phone'];
 $date = $row2['order_date'];
 $mpdf = new \Mpdf\Mpdf();

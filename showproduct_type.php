@@ -28,7 +28,7 @@ $type_id = $_REQUEST["ID"];
    INNER JOIN ecu_product_type
    ON ecu_product.type_id = ecu_product_type.type_id
    WHERE ecu_product.type_id LIKE '%".$type_id."%' 
-   ORDER BY ecu_product.p_id ASC";
+   ORDER BY ecu_product.p_name ASC";
 
    $query = mysqli_query($con,$sql);
    while($list = mysqli_fetch_array($query)){

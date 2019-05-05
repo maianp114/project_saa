@@ -2,11 +2,8 @@
 include('bootstrap_h.php');
 include('condb.php');
 include('bg2.php');
-
-
-?>
-<?php
 include('menu.php');
+
 ?>
   <div class="container" style="margin-top:80px;">
          <div class="col-sm-12">
@@ -23,7 +20,7 @@ include('menu.php');
    ON ecu_order.order_id = ecu_order_detail.order_id
    INNER JOIN ecu_product
    ON ecu_order_detail.p_id = ecu_product.p_id
-   WHERE ecu_order.c_id LIKE '%".$c_id."%'
+   WHERE ecu_order.order_status = 'รอการชำระเงิน'
    GROUP BY ecu_order.order_id 
    ORDER BY ecu_order.order_id ASC , ecu_order_detail.p_id ASC";;
    
@@ -42,9 +39,8 @@ include('menu.php');
                       <td>จำนวนชิ้น</td>
                       <td>ราคารวม</td>	
                       <td>สถานะ</td>	
-                      <td>วันที่สั่งซื้อ</td>	
-                      <td>รายละเอียด</td>		
-                      <td>ยกเลิกออเดอร์</td>	                      			  				  				  
+                      <td>วันที่สั่งซื้อ</td>		
+                      <td>ชำระเงิน</td>					  				  				  
                     </tr>";
   
 
@@ -70,19 +66,14 @@ $sql2 = "SELECT  COUNT(order_id) AS 'count_order' ,SUM(p_qty) AS 'sum_qty' , SUM
     $query3 = mysqli_query($con,$sql3);
     }  
                   echo "<tr bgcolor='#fff'>";
-                    echo "<td align='center'>" .$result["order_id"] .  "</td> ";
+                    echo "<td>" .$result["order_id"] .  "</td> ";
                     echo "<td>" .$result["name"] .  "</td> ";
-                    echo "<td align='center'>" .$sum_qty ."</td> ";
+                    echo "<td>" .$sum_qty ."</td> ";
                     echo "<td>" .$totalprice ."</td> ";
                     echo "<td>" .$result["order_status"] .  "</td> ";
                     echo "<td>" .$result["order_date"] .  "</td> ";	
-                 
-                    echo "<td><a href='detail_order2.php?order_id=$order_no' class='btn btn-warning btn-sm'>รายละเอียด</a></td> ";
-                    if($result["order_status"] == "รอการชำระเงิน"){
-                      echo "<td><a href='order_del_db.php?order_id=$order_no'onclick=\"return confirm('คุณแน่ใจนะว่าต้องการยกเลิกออเดอร์นี้? !!!')\"  class='btn btn-danger btn-sm'>ยกเลิกออเดอร์</a></td> ";										
-                      } else{
-                        echo "<td><a href='preview.php?order_id=$order_no' disabled class='btn btn-danger btn-sm'>ยกเลิกออเดอร์</a></td> ";  
-                      }
+                    echo "<td><a href='payment.php?order_id=$order_no' class='btn btn-warning btn-sm'>ชำระเงิน</a></td> ";										
+ 
                     echo "</tr>";
 }
                 echo "</table>";

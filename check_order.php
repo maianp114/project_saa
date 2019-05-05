@@ -71,35 +71,56 @@ $order_id = $_REQUEST["ID"];
    ON ecu_order_detail.p_id = ecu_product.p_id
    WHERE ecu_order.order_id LIKE '%".$order_id."%' 
    ORDER BY ecu_order.order_id ASC , ecu_order_detail.p_id ASC";
-
+    $total	+= $sum;
+    $net = $total*0.93;
+    $vat = $total*0.07;
    $query = mysqli_query($con,$sql2);
 
 ?>
-<table width="600" border="1">
+<table width="800" border="1">
   <tr>
 
 
     <th width="97"> <div align="center">รหัสสินค้า</div></th>
     <th width="97"> <div align="center">ชื่อสินค้า</div></th>
+    <th width="97"> <div align="center">ราคาสินค้า</div></th>  
     <th width="97"> <div align="center">จำนวนสินค้า</div></th>
-    <th width="97"> <div align="center">ราคาสินค้า</div></th>               
+    <th width="97"> <div align="center">ราคารวมสินค้า</div></th>               
 
   </tr>
 <?php
 while($result=mysqli_fetch_array($query,MYSQLI_ASSOC))
 {
+  $sum	= $result['total'];
+  $total	+= $sum;
+  $net = $total*0.93;
+  $vat = $total*0.07;
 ?>
   <tr>
 
      <td align="right"><?php echo $result["p_id"];?></td>  
-     <td align="right"><?php echo $result["p_name"];?></td>  
+     <td align="right"><?php echo $result["p_name"];?></td> 
+     <td align="right"><?php echo $result["p_price"];?></td>  
      <td align="right"><?php echo $result["p_qty"];?></td>
       <td align="right"><?php echo $result["total"];?></td>              
 
   </tr>
 <?php
 }
+echo "<tr>";
+echo "<td  align='right' colspan='4'><b>ราคาสุทธิ</b></td>";
+echo "<td align='right'>"."<b>".number_format($net,2)."</b>"."</td>";
+echo "</tr>";
+echo "<tr>";
+echo "<td  align='right' colspan='4'><b>ภาษี 7%</b></td>";
+echo "<td align='right'>"."<b>".number_format($vat,2)."</b>"."</td>";
+echo "</tr>";
+echo "<tr>";
+echo "<td  align='right' colspan='4'><b>รวม</b></td>";
+echo "<td align='right'>"."<b>".number_format($total,2)."</b>"."</td>";
+echo "</tr>";
 ?>
+
 </table>
 <?php
 mysqli_close($con);

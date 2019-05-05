@@ -8,7 +8,10 @@ include('condb.php');
 	$objResult = mysqli_fetch_array($objQuery,MYSQLI_ASSOC);
 	if(!$objResult)
 	{
-			echo "Username and Password Incorrect!";
+		echo "<script type='text/javascript'>";
+		echo  "alert('Username and Password Incorrect');";
+		echo "window.location='login.php';";
+		echo "</script>";
 	}
 	else
 	{

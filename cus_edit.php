@@ -2,7 +2,7 @@
 <?php
 
 include('condb.php');  
-
+include('menu.php');
 $c_id =  $_REQUEST["UserID"];
 
 $sql = "SELECT * FROM ecu_member WHERE c_id='$c_id' ";
@@ -10,7 +10,8 @@ $result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_erro
 $row = mysqli_fetch_array($result);
 extract($row);
 ?>
-<?php include('h.php');?>
+<?php include('bootstrap_h.php');?>
+<div class="container">
 <form  name="register" action="cus_edit_db.php" method="POST" class="form-horizontal">
 <input type="hidden" name="c_id" value="<?php echo $c_id; ?>">
        <div class="form-group">
@@ -54,4 +55,6 @@ extract($row);
           <button type="submit" class="btn btn-success" id="btn"><span class="glyphicon glyphicon-ok"></span> บันทึก </button>
           </div>     
       </div>
+      </div>
       </form>
+      <?php include('script.php');?> 

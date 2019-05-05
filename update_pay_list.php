@@ -2,7 +2,7 @@
  <?php
       include('h.php');
                 include('condb.php');
-                $query = "SELECT * FROM ecu_order ORDER BY order_date ASC" or die("Error:" . mysqli_error());
+                $query = "SELECT * FROM ecu_order WHERE order_status = 'รอตรวจสอบ' ORDER BY order_date ASC" or die("Error:" . mysqli_error());
                 $result = mysqli_query($con, $query);
                 ?>
                 <table class="table table-hover">
@@ -13,8 +13,7 @@
               <th scope="col">เบอร์โทรศัพท์</th>
               <th scope="col">สถานะ</th>
               <th scope="col">วันที่สั่งซื้อ</th>
-              <th scope="col">ตรวจสอบ</th>
-              <th scope="col">ใบเสร็จ</th>
+              <th scope="col">ตรวจสอบการชำระเงิน</th>
            </tr>                 
                     <?php
                   while($row = mysqli_fetch_array($result)) {
@@ -24,17 +23,8 @@
                     echo "<td>" .$row["name"] .  "</td> ";
                     echo "<td>" .$row["phone"] .  "</td> ";
                     echo "<td>" .$row["order_status"] .  "</td> ";
-					echo "<td>" .$row["order_date"] .  "</td> ";
-                    if($row["order_status"] == "ชำระเงินแล้ว"){ 
-                    echo "<td><a href='order.php?act=checko&ID=$row[0]' class='btn  btn-xs'style='background:#ff4e50;'><i class='fas fa-clipboard-list'></i> ตรวจสอบ</a></td> ";
-                    
-                    echo "<td><a href='preview.php?order_id=$row[0] ' class='btn btn-xs' style='background:#f9d423;' ><i class='fas fa-file-invoice'  ></i> report</a></td> ";  
-                    }elseif($row["order_status"] == "รอตรวจสอบ"){ 
-                    echo "<td><a href='order.php?act=check&ID=$row[0]' class='btn  btn-xs'style='background:#ff4e50;'><i class='fas fa-clipboard-list'></i> ตรวจสอบ</a></td> ";                                   
-                    
-                    }else{
-                      echo "<td><a href='order.php?act=check&ID=$row[0]' class='btn  btn-xs'style='background:#ff4e50;'><i class='fas fa-clipboard-list'></i> ตรวจสอบ</a></td> ";
-                    }
+					echo "<td>" .$row["order_date"] .  "</td> ";                                 
+                    echo "<td><a href='update_pay.php?act=check&ID=$row[0]' class='btn  btn-xs'style='background: #ff4e50	;'><i class='fas fa-money-check-alt'></i> ตรวจสอบการชำระเงิน</a></td> "; 
                   echo "</tr>";
                   }
                 echo "</table>";

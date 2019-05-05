@@ -35,7 +35,7 @@
       </div>
         <div class="col-md-8">
 
-  <p> <button class="btn btn-primary" onClick="window.print()"> print </button></p>
+
   <table width="700" border="1" align="center" class="table">
   <tr>
     <td width="1558" colspan="5" align="center">
@@ -77,7 +77,10 @@
 		$query =mysqli_query($con, $sql);
 		while($row = mysqli_fetch_array($query)) {
 		$sum	= $row['p_price']*$row['p_qty'];
-		$total	+= $sum;
+    $total	+= $sum;
+    $total	+= $sum;
+    $net = $total*0.93;
+    $vat = $total*0.07;
     echo "<tr>";
 	echo "<td align='center'>";
 	echo  $i += 1;
@@ -88,10 +91,19 @@
     echo "<td align='right'>".number_format($sum,2)."</td>";
     echo "</tr>";
         }
-	echo "<tr>";
-    echo "<td  align='right' colspan='4'><b>รวม</b></td>";
-    echo "<td align='right'>"."<b>".number_format($total,2)."</b>"."</td>";
-    echo "</tr>";
+        echo "<tr>";
+        echo "<td  align='right' colspan='4'><b>ราคาสุทธิ</b></td>";
+        echo "<td align='right'>"."<b>".number_format($net,2)."</b>"."</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td  align='right' colspan='4'><b>ภาษี 7%</b></td>";
+        echo "<td align='right'>"."<b>".number_format($vat,2)."</b>"."</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo "<td  align='right' colspan='4'><b>รวม</b></td>";
+        echo "<td align='right'>"."<b>".number_format($total,2)."</b>"."</td>";
+        echo "</tr>";
+    
 ?>
 </table>
 

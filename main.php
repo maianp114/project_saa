@@ -17,3 +17,4 @@ include('bg2.php');
 			<p class="elementor-heading-title elementor-size-large">ECU=SHOP THAILAND</p>
 			<p class="elementor-heading-title elementor-size-default">WHERE PERFORMANCE BEGINS</p>
       </div>		
+      <?php include('script.php');?> 

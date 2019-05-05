@@ -50,7 +50,9 @@
 		<div class="radio">
   		<label><input type="radio" name="optradio" value="promtpay">  <img src="img/promtpay.png" width="30" height="30"> พร้อมเพย์ ชื่อ อนุพงศ์ เกาะน้ำใส เลขที่บัญชี 092-720-9955</label>
 		</div>
-    
+    <div class="form-group">
+           <div class="col-sm-12 ">
+    <p> วันและเวลาที่โอน </p>
     <input id="input" width="234" name='input'/>
     <script>
         $('#input').datetimepicker({
@@ -59,10 +61,11 @@
             footer: true
         });
     </script>
-
+          </div>
+        </div> 
         <div class="form-group">
-           <div class="col-sm-8 ">
-            <p> ภาพสินค้า </p>
+           <div class="col-sm-10 ">
+            <p> ภาพหลักฐานการโอนเงิน </p>
             <input type="file" name="p_img" class="form-control" />
           </div>
         </div>   

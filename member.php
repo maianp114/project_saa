@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 <?php include('h.php');
 
@@ -16,8 +17,9 @@ error_reporting( error_reporting() & ~E_NOTICE );?>
         <?php include('menu_left.php');?>
        
       </div>
-            <div class="col-md-6">
-		<a href="member.php?act=add" button type="button" class="btn btn-danger">เพิ่ม </button> </a>
+            <div class="col-md-9">
+            <p align='center'>จัดการสมาชิก </p>
+		<a href="member.php?act=add" button type="button" class="btn btn-danger"><i class="fas fa-user-plus"></i> เพิ่ม </button> </a>
         <p></p>
 		<?php
 			$act = $_GET['act'];

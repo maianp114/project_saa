@@ -1,5 +1,5 @@
 <?php
-// include('bg2.php');
+
     error_reporting( error_reporting() & ~E_NOTICE );
     session_start(); 
     $p_id = $_REQUEST['p_id']; 
@@ -24,7 +24,7 @@
 		}
 	}
 
-	if($act=='remove' && !empty($p_id))  //ยกเลิกการสั่งซื้อ
+	if($act=='remove' && !empty($p_id))  
 	{
 		unset($_SESSION['shopping_cart'][$p_id]);
 	}
@@ -59,7 +59,8 @@
 <style>
     body {
         font-family: 'Sarabun', sans-serif;
-        background: #e6e7eb;
+        background: url('img/zxc.jpg');
+        background-size: cover; 
     }
 .box_cart {
     width: 650px;
@@ -154,7 +155,7 @@ hr {
                             echo '<div class="row" style="padding:10px">';
                             echo '<div class="col-9">';
                             echo 'ราคาสุทธิ <br>';
-                            echo 'ภาษีมูลค่าเพิ่ม<br>';
+                            echo 'ภาษีมูลค่าเพิ่ม 7%<br>';
                             echo 'ราคารวม';
                             echo '</div>';
                             echo '<div class="col-3">';

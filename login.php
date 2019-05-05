@@ -51,7 +51,7 @@
 						<button class="login100-form-btn">
 							Login
 						</button>
-						<a class="login100-form-btn">
+						<a  href='register.php' class="login100-form-btn">
 							Register
 						</a>
 					</div>
